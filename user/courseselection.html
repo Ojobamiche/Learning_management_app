@@ -1,0 +1,12 @@
+<!-- courseselection.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {% for course in courses %}
+    <input type="checkbox" name="courses" value="{{ course.id }}">{{ course.name }}<br>
+    {% endfor %}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

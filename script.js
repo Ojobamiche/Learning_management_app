@@ -69,13 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Check if the current page is the course content page
-    if (window.location.pathname === '/course-content') {
+    if (window.location.pathname === '/course_content') {
         // Call the fetchCourseContent function
         fetchCourseContent();
     }
 
      // Check if the current page is the course content page
-    if (window.location.pathname === '/leader-board') {
+    if (window.location.pathname === '/leader_board') {
         // Fetch course content from server
         fetchLeaderboardData();
     }
@@ -116,7 +116,7 @@ function displayCourseContent(courseContent) {
     courseNameElement.textContent = courseContent.name;
 
     // Get the course content element
-    const courseContentElement = document.getElementById('course-content');
+    const courseContentElement = document.getElementById('course_content');
     // Clear previous content
     courseContentElement.innerHTML = '';
 

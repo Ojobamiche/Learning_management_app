@@ -1,0 +1,30 @@
+from django.shortcuts import render
+from .models import Course, UserCourse
+
+def select_courses(request):
+    if request.method == 'POST':
+        selected_course_ids = request.POST.getlist('selected_courses')
+        for course_id in selected_course_ids:
+            course = Course.objects.get(id=course_id)
+            UserCourse.objects.create(user=request.user, course=course)
+        # Redirect to a new URL after POST
+        return HttpResponseRedirect('https://plpacademy.powerlearnproject.org/course-module/631afee71557dcfbdc7dbf13')
+
+    # If not POST, or the form is not valid, render page with form
+    courses = Course.objects.all()
+    return render(request, 'index.html', {'courses': courses})
+
+def display_selected_courses(request):
+    courses = UserCourse.objects.filter(user=request.user).select_related('course')
+    return render(request, 'dashboard.html', {'user': request.user, 'courses': courses})
+
+# views.py
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import UserProfile
+
+@login_required
+def display_selected_courses(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    selected_courses = user_profile.selected_courses.all()
+    return render(request, 'selected_courses.html', {'courses': selected_courses})
