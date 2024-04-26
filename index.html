@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Management App</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,7 +26,15 @@
     <form id="logout-form">
         <button type="submit">Logout</button>
     </form>
- 
+  <!-- Place for the real-time chart -->
+<canvas id="realtimeChart"></canvas>
+  <!-- Section for widgets -->
+<div id="widgets">
+    <div id="calendarWidget">Calendar Widget</div>
+    <div id="todoListWidget">To-do List Widget</div>
+    <div id="newsFeedWidget">News Feed Widget</div>
+</div>
+<button id="customizeButton">Customize Widgets</button>
     <script src="script.js"></script>
 </body>
   <div>

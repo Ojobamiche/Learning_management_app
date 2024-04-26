@@ -205,3 +205,44 @@ function displayFullName(fullName) {
     // Set the inner HTML of the element to the user's full name
     fullNameElement.textContent = fullName;
 }
+
+const ctx = document.getElementById('realtimeChart').getContext('2d');
+const realtimeChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [], // Time labels
+        datasets: [{
+            label: 'Real-time Data',
+            data: [], // Data points
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            x: {
+                type: 'realtime',
+                realtime: {
+                    delay: 2000,
+                    onRefresh: chart => {
+                        chart.data.labels.push(Date.now());
+                        chart.data.datasets.forEach(dataset => {
+                            dataset.data.push(getRandomData()); // Replace with actual data
+                        });
+                    }
+                }
+            }
+        }
+    }
+});
+
+function getRandomData() {
+    return Math.floor(Math.random() * 100); // Replace with actual data fetching logic
+}
+document.getElementById('customizeButton').addEventListener('click', () => {
+    const widgets = document.getElementById('widgets');
+    // Logic to open a customization modal where users can add, remove, or rearrange widgets
+    // This is a placeholder for your customization logic
+    alert('Customize your widgets here!');
+});
